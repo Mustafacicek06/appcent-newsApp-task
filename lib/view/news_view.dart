@@ -7,6 +7,7 @@ import 'package:appcent_news_task/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class NewsView extends StatefulWidget {
   NewsView({Key? key}) : super(key: key);
@@ -30,6 +31,8 @@ class _NewsViewState extends State<NewsView> {
   NewsModel? _lastFetchNews;
 
   final ScrollController _scrollController = ScrollController();
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: true);
 
   List<NewsModel> _allNews = [];
 
@@ -48,79 +51,94 @@ class _NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: newsPageBody(context),
+      body: newsViewScaffoldBody(context),
     );
   }
 
-  Column newsPageBody(BuildContext context) {
+  Column newsViewScaffoldBody(BuildContext context) {
     final _newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
 
     return Column(children: [
       SizedBox(
         height: MediaQuery.of(context).size.height / 15,
       ),
-      Text(
-        Constants.instance.appTitle,
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-      ),
-      Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Card(
-              child: TextField(
-            controller: _textEditingController,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              prefixIcon: IconButton(
-                  onPressed: (() {
-                    _newsViewModel.models.clear();
-                    setState(() {});
-                  }),
-                  icon: const Icon(Icons.search)),
-              hintText: Constants.instance.searchTextFieldHintText,
-              suffixIcon: IconButton(
-                onPressed: _textEditingController.clear,
-                icon: const Icon(Icons.clear),
-              ),
-            ),
-          ))),
+      appTitleTextWidget(),
+      appTextField(_newsViewModel),
       SizedBox(
-        height: MediaQuery.of(context).size.height / 15,
+        height: MediaQuery.of(context).size.height / 15 - 30,
       ),
-      Expanded(
-        child: FutureBuilder<List<NewsModel>?>(
-          future: _newsViewModel.fetchAllData(
-              searchingCategory: _textEditingController.text
-                  .replaceAll(' ', '')
-                  .toLowerCase()),
-          builder: (context, snapshot) => ListView.builder(
-            itemCount: snapshot.data?.length ?? 0,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => Navigator.of(context, rootNavigator: false)
-                    .push(MaterialPageRoute(
-                  builder: (context) => DetailView(newsIndex: index),
-                )),
-                child: Card(
-                  child: ListTile(
-                    focusColor: Colors.red,
-                    title: Text(_newsViewModel.models[index].title.toString()),
-                    subtitle: Text(
-                        _newsViewModel.models[index].description.toString()),
-                    trailing: ClipRRect(
-                        child: Image.network(
-                      _newsViewModel.models[index].urlToImage.toString(),
-                      errorBuilder: (context, error, stackTrace) {
-                        return Text(Constants.instance.imageNotFound);
-                      },
-                    )),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      )
+      bringsNewsFutureBuilder(_newsViewModel)
     ]);
+  }
+
+  Text appTitleTextWidget() {
+    return Text(
+      Constants.instance.appTitle,
+      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Padding appTextField(NewsViewModel _newsViewModel) {
+    return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+            child: TextField(
+          controller: _textEditingController,
+          decoration: textFieldDecoration(_newsViewModel),
+        )));
+  }
+
+  InputDecoration textFieldDecoration(NewsViewModel _newsViewModel) {
+    return InputDecoration(
+      border: InputBorder.none,
+      prefixIcon: IconButton(
+          onPressed: (() {
+            _newsViewModel.models.clear();
+            setState(() {});
+          }),
+          icon: const Icon(Icons.search)),
+      hintText: Constants.instance.searchTextFieldHintText,
+      suffixIcon: IconButton(
+        onPressed: _textEditingController.clear,
+        icon: const Icon(Icons.clear),
+      ),
+    );
+  }
+
+  Expanded bringsNewsFutureBuilder(NewsViewModel _newsViewModel) {
+    return Expanded(
+      child: FutureBuilder<List<NewsModel>?>(
+        future: _newsViewModel.fetchAllData(
+            searchingCategory:
+                _textEditingController.text.replaceAll(' ', '').toLowerCase()),
+        builder: (context, snapshot) => ListView.builder(
+          itemCount: snapshot.data?.length ?? 0,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () => Navigator.of(context, rootNavigator: false)
+                  .push(MaterialPageRoute(
+                builder: (context) => DetailView(newsIndex: index),
+              )),
+              child: Card(
+                child: ListTile(
+                  focusColor: Colors.red,
+                  title: Text(_newsViewModel.models[index].title.toString()),
+                  subtitle:
+                      Text(_newsViewModel.models[index].description.toString()),
+                  trailing: ClipRRect(
+                      child: Image.network(
+                    _newsViewModel.models[index].urlToImage.toString(),
+                    errorBuilder: (context, error, stackTrace) {
+                      return Text(Constants.instance.imageNotFound);
+                    },
+                  )),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 
   void bringMoreUsers(String? searchingCategory) async {

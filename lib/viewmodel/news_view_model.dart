@@ -16,10 +16,14 @@ class NewsViewModel with ChangeNotifier {
   }
 
   Future<List<NewsModel>?> fetchAllData(
-      {String? searchingCategory, int? pageCounter}) async {
+      {String? searchingCategory,
+      int? pageCounter
+     }) async {
     searchingCategory?.replaceAll(RegExp(r"\s+"), "");
     Constants.instance.searchingCategory = searchingCategory ?? "besiktas";
     Constants.instance.pageCounter = pageCounter ?? 1;
+
+    
 
     final response = await dio.get(ServicePath.search.rawValue);
     // http dart.io dan gelmeli dikkat et ona
