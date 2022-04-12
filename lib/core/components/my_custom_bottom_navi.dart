@@ -1,4 +1,4 @@
-import 'package:appcent_news_task/components/tab_items.dart';
+import 'package:appcent_news_task/core/components/tab_items.dart';
 import 'package:flutter/cupertino.dart';
 
 class MyCustomBottomNavigation extends StatelessWidget {

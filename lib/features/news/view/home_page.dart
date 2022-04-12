@@ -1,8 +1,8 @@
-import 'package:appcent_news_task/components/my_custom_bottom_navi.dart';
-import 'package:appcent_news_task/components/tab_items.dart';
-import 'package:appcent_news_task/model/news_model.dart';
-import 'package:appcent_news_task/view/favorites_view.dart';
-import 'package:appcent_news_task/view/news_view.dart';
+import 'package:appcent_news_task/core/components/my_custom_bottom_navi.dart';
+import 'package:appcent_news_task/core/components/tab_items.dart';
+import 'package:appcent_news_task/features/news/view/favorites_view.dart';
+import 'package:appcent_news_task/features/news/view/news_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 

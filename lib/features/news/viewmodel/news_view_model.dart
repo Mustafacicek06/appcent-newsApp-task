@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:appcent_news_task/core/constants/constants.dart';
+import 'package:appcent_news_task/features/news/model/news_model.dart';
+import 'package:appcent_news_task/features/news/services/network_manager.dart';
 
-import 'package:appcent_news_task/constants/constants.dart';
-import 'package:appcent_news_task/model/news_model.dart';
-import 'package:appcent_news_task/services/network_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -16,14 +16,10 @@ class NewsViewModel with ChangeNotifier {
   }
 
   Future<List<NewsModel>?> fetchAllData(
-      {String? searchingCategory,
-      int? pageCounter
-     }) async {
+      {String? searchingCategory, int? pageCounter}) async {
     searchingCategory?.replaceAll(RegExp(r"\s+"), "");
     Constants.instance.searchingCategory = searchingCategory ?? "besiktas";
     Constants.instance.pageCounter = pageCounter ?? 1;
-
-    
 
     final response = await dio.get(ServicePath.search.rawValue);
     // http dart.io dan gelmeli dikkat et ona

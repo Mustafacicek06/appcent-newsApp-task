@@ -1,8 +1,7 @@
-import 'package:appcent_news_task/constants/constants.dart';
-import 'package:appcent_news_task/model/news_model.dart';
-import 'package:appcent_news_task/view/detail_view.dart';
-
-import 'package:appcent_news_task/viewmodel/news_view_model.dart';
+import 'package:appcent_news_task/core/constants/constants.dart';
+import 'package:appcent_news_task/features/news/model/news_model.dart';
+import 'package:appcent_news_task/features/news/view/detail_view.dart';
+import 'package:appcent_news_task/features/news/viewmodel/news_view_model.dart';
 
 import 'package:flutter/material.dart';
 

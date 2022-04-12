@@ -1,4 +1,4 @@
-import 'package:appcent_news_task/constants/constants.dart';
+import 'package:appcent_news_task/core/constants/constants.dart';
 import 'package:dio/dio.dart';
 
 class NetworkManager {
