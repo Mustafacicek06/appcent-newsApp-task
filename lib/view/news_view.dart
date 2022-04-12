@@ -5,7 +5,7 @@ import 'package:appcent_news_task/view/detail_view.dart';
 import 'package:appcent_news_task/viewmodel/news_view_model.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
+
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
@@ -18,13 +18,23 @@ class NewsView extends StatefulWidget {
 class _NewsViewState extends State<NewsView> {
   var _textEditingController = TextEditingController();
 
+  // flag control variable
   bool _isLoading = false;
+
+  // Any more news to bring?
+  bool _hasMore = true;
+
+  int pageCount = 1;
+
+  // most recently brought news
+  NewsModel? _lastFetchNews;
 
   final ScrollController _scrollController = ScrollController();
 
+  List<NewsModel> _allNews = [];
+
   @override
   void initState() {
-    //_textEditingController.text = "besiktas";
     super.initState();
   }
 
@@ -85,7 +95,7 @@ class _NewsViewState extends State<NewsView> {
           builder: (context, snapshot) => ListView.builder(
             itemCount: snapshot.data?.length ?? 0,
             itemBuilder: (context, index) {
-              return InkWell(
+              return GestureDetector(
                 onTap: () => Navigator.of(context, rootNavigator: false)
                     .push(MaterialPageRoute(
                   builder: (context) => DetailView(newsIndex: index),
@@ -113,13 +123,16 @@ class _NewsViewState extends State<NewsView> {
     ]);
   }
 
-  void bringMoreUsers() {
+  void bringMoreUsers(String? searchingCategory) async {
     if (_isLoading == false) {
       _isLoading = true;
-
+      int morePageCount = Constants.instance.pageCounter;
+      setState(() {});
       // pagination işlemlerini yap
-      //final _allUsersViewModel =
-      //  Provider.of<AllUsersViewModel>(context, listen: false);
+      final _newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
+
+      await _newsViewModel.fetchAllData(
+          searchingCategory: searchingCategory, pageCounter: morePageCount);
 
       // _allUsersViewModel.bringMoreUsers();
 
@@ -127,7 +140,7 @@ class _NewsViewState extends State<NewsView> {
     }
   }
 
-  void _listScrollListener() {
+  void _listScrollListener(String? searchingCategory) {
     // scroll controlleri sürekli kontrol etmemize gerek yok
     // ya yukarı ya da aşşağı vardıysa kontrol etsek yeterli olur.
 
@@ -136,7 +149,7 @@ class _NewsViewState extends State<NewsView> {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-      bringMoreUsers();
+      bringMoreUsers(searchingCategory);
     }
   }
 }
