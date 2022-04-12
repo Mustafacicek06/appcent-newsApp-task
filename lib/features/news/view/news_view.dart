@@ -24,8 +24,6 @@ class _NewsViewState extends State<NewsView> {
   // Any more news to bring?
   bool _hasMore = true;
 
-  int pageCount = 1;
-
   // most recently brought news
   NewsModel? _lastFetchNews;
 
@@ -37,6 +35,15 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   void initState() {
+    // sürekli kontrol etmemize gerek yok yani sadece
+    // köşelere vardığında kontrol ederiz
+
+    _scrollController.addListener(() {
+      if (Constants.instance.pageCounter <= 5) {
+        _listScrollListener(_textEditingController.text);
+      }
+    });
+
     super.initState();
   }
 
@@ -93,6 +100,7 @@ class _NewsViewState extends State<NewsView> {
       prefixIcon: IconButton(
           onPressed: (() {
             _newsViewModel.models.clear();
+            Constants.instance.pageCounter = 1;
             setState(() {});
           }),
           icon: const Icon(Icons.search)),
@@ -111,6 +119,7 @@ class _NewsViewState extends State<NewsView> {
             searchingCategory:
                 _textEditingController.text.replaceAll(' ', '').toLowerCase()),
         builder: (context, snapshot) => ListView.builder(
+          controller: _scrollController,
           itemCount: snapshot.data?.length ?? 0,
           itemBuilder: (context, index) {
             return GestureDetector(
@@ -140,16 +149,15 @@ class _NewsViewState extends State<NewsView> {
     );
   }
 
-  void bringMoreUsers(String? searchingCategory) async {
+  void bringMoreNews(String? searchingCategory) async {
     if (_isLoading == false) {
       _isLoading = true;
-      int morePageCount = Constants.instance.pageCounter;
+
       setState(() {});
       // pagination işlemlerini yap
       final _newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
 
-      await _newsViewModel.fetchAllData(
-          searchingCategory: searchingCategory, pageCounter: morePageCount);
+      await _newsViewModel.fetchAllData(searchingCategory: searchingCategory);
 
       // _allUsersViewModel.bringMoreUsers();
 
@@ -166,7 +174,7 @@ class _NewsViewState extends State<NewsView> {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-      bringMoreUsers(searchingCategory);
+      bringMoreNews(searchingCategory);
     }
   }
 }

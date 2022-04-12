@@ -15,26 +15,28 @@ class NewsViewModel with ChangeNotifier {
     fetchAllData();
   }
 
-  Future<List<NewsModel>?> fetchAllData(
-      {String? searchingCategory, int? pageCounter}) async {
+  Future<List<NewsModel>?> fetchAllData({String? searchingCategory}) async {
     searchingCategory?.replaceAll(RegExp(r"\s+"), "");
     Constants.instance.searchingCategory = searchingCategory ?? "besiktas";
-    Constants.instance.pageCounter = pageCounter ?? 1;
 
     final response = await dio.get(ServicePath.search.rawValue);
     // http dart.io dan gelmeli dikkat et ona
 
     try {
-      if (response.statusCode == HttpStatus.ok) {
-        Constants.instance.pageCounter++;
-        (response.data["articles"]).map((e) {});
+      if (Constants.instance.pageCounter <= 5) {
+        if (response.statusCode == HttpStatus.ok) {
+          Constants.instance.pageCounter++;
+          (response.data["articles"]).map((e) {});
 
-        (response.data["articles"] as List).forEach((element) {
-          models.add(NewsModel.fromJson(element));
-          // models.forEach((element) {});
-        });
+          (response.data["articles"] as List).forEach((element) {
+            models.add(NewsModel.fromJson(element));
+            // models.forEach((element) {});
+          });
 
-        return models;
+          return models;
+        } else {
+          return null;
+        }
       }
     } on DioError catch (e) {
       debugPrint(e.message);
