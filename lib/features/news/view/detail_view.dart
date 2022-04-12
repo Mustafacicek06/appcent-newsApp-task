@@ -9,17 +9,24 @@ import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
 class DetailView extends StatefulWidget {
-  DetailView({Key? key, required this.newsIndex}) : super(key: key);
+  const DetailView({Key? key, required this.newsIndex}) : super(key: key);
   final int newsIndex;
 
   @override
   State<DetailView> createState() => _DetailViewState();
 }
 
-class _DetailViewState extends State<DetailView> {
-  final GlobalKey _widgetKey = GlobalKey();
-
+class _DetailViewState extends State<DetailView>
+    with SingleTickerProviderStateMixin {
   List<NewsModel>? _favoriteNewsList = [];
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 1, vsync: this);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +40,41 @@ class _DetailViewState extends State<DetailView> {
         _newsViewModel.models[widget.newsIndex].publishedAt?.day;
 
     return Scaffold(
+      bottomNavigationBar: scaffoldBottomNavigatorBar(context),
       appBar: scaffoldAppBar(_newsViewModel),
       body: scaffoldBody(_newsViewModel, _publishedYear, _publishedMonth,
           _publishedDay, context),
+    );
+  }
+
+  Material scaffoldBottomNavigatorBar(BuildContext context) {
+    return Material(
+      color: Colors.white,
+      child: TabBar(
+        controller: tabController,
+        indicatorColor: Colors.transparent,
+        tabs: [
+          InkWell(
+            onTap: () {
+              Navigator.of(context, rootNavigator: false).push(
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          WebViewPage(selectedIndex: widget.newsIndex)));
+            },
+            child: Tab(
+              child: Container(
+                padding: const EdgeInsets.all(4.0),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
+                child: Text(
+                  'News Source',
+                  style: StyleConstants.instance.newsTitleStyle,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -68,7 +107,7 @@ class _DetailViewState extends State<DetailView> {
                 NewsModel.setFavoriteNews(_favoriteNewsList!);
               });
             },
-            child: Icon(Icons.favorite))
+            child: const Icon(Icons.favorite))
       ],
     );
   }
@@ -87,15 +126,6 @@ class _DetailViewState extends State<DetailView> {
           scaffoldBodyIcons(
               _newsViewModel, _publishedYear, _publishedMonth, _publishedDay),
           scaffoldBodyNewsContentText(_newsViewModel),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context, rootNavigator: false)
-                    .push(MaterialPageRoute(
-                  builder: (context) =>
-                      WebViewPage(selectedIndex: widget.newsIndex),
-                ));
-              },
-              child: Text('GO TO '))
         ],
       ),
     );
@@ -130,7 +160,7 @@ class _DetailViewState extends State<DetailView> {
             leading: const Icon(Icons.access_alarm),
             trailing: Text(
               _newsViewModel.models[widget.newsIndex].author.toString(),
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ),
         ),

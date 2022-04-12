@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class SizeConstants {
   static SizeConstants instance = SizeConstants._init();
   SizeConstants._init();

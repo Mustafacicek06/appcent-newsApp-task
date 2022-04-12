@@ -1,4 +1,5 @@
 import 'package:appcent_news_task/core/constants/constants.dart';
+import 'package:appcent_news_task/core/constants/style_constants.dart';
 import 'package:appcent_news_task/features/news/model/news_model.dart';
 import 'package:appcent_news_task/features/news/view/detail_view.dart';
 import 'package:appcent_news_task/features/news/viewmodel/news_view_model.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class NewsView extends StatefulWidget {
-  NewsView({Key? key}) : super(key: key);
+  const NewsView({Key? key}) : super(key: key);
 
   @override
   State<NewsView> createState() => _NewsViewState();
@@ -21,13 +22,10 @@ class _NewsViewState extends State<NewsView> {
   bool _isLoading = false;
 
   // Any more news to bring?
-  bool _hasMore = true;
 
   // most recently brought news
 
   final ScrollController _scrollController = ScrollController();
-
-  List<NewsModel> _allNews = [];
 
   @override
   void initState() {
@@ -76,7 +74,7 @@ class _NewsViewState extends State<NewsView> {
   Text appTitleTextWidget() {
     return Text(
       Constants.instance.appTitle,
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+      style: StyleConstants.instance.appTitleTextStyle,
     );
   }
 
@@ -119,7 +117,7 @@ class _NewsViewState extends State<NewsView> {
           itemCount: snapshot.data?.length ?? 0,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () => Navigator.of(context, rootNavigator: false)
+              onTap: () => Navigator.of(context, rootNavigator: true)
                   .push(MaterialPageRoute(
                 builder: (context) => DetailView(newsIndex: index),
               )),

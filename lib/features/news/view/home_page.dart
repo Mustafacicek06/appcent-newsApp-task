@@ -4,10 +4,9 @@ import 'package:appcent_news_task/features/news/view/favorites_view.dart';
 import 'package:appcent_news_task/features/news/view/news_view.dart';
 
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,8 +17,8 @@ class _HomePageState extends State<HomePage> {
   Map<TabItem, Widget> allPages() {
     return {
       // burada viewModel'ı verebilirsin ChangeNotifierProvider ile
-      TabItem.news: NewsView(),
-      TabItem.favorites: FavoritesView(),
+      TabItem.news: const NewsView(),
+      TabItem.favorites: const FavoritesView(),
     };
   }
 
@@ -32,7 +31,9 @@ class _HomePageState extends State<HomePage> {
           onSelectedTab: (onSelectedTab) {
             _currentTab = onSelectedTab;
 
-            onSelectedTab == TabItem.news ? NewsView() : FavoritesView();
+            onSelectedTab == TabItem.news
+                ? const NewsView()
+                : const FavoritesView();
           }),
     );
   }

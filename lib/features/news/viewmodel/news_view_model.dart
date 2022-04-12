@@ -28,10 +28,10 @@ class NewsViewModel with ChangeNotifier {
           Constants.instance.pageCounter++;
           (response.data["articles"]).map((e) {});
 
-          (response.data["articles"] as List).forEach((element) {
+          for (var element in (response.data["articles"] as List)) {
             models.add(NewsModel.fromJson(element));
             // models.forEach((element) {});
-          });
+          }
 
           return models;
         } else {
