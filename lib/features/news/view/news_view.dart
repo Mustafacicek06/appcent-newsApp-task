@@ -6,7 +6,6 @@ import 'package:appcent_news_task/features/news/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class NewsView extends StatefulWidget {
   NewsView({Key? key}) : super(key: key);
