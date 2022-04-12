@@ -25,11 +25,8 @@ class _NewsViewState extends State<NewsView> {
   bool _hasMore = true;
 
   // most recently brought news
-  NewsModel? _lastFetchNews;
 
   final ScrollController _scrollController = ScrollController();
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: true);
 
   List<NewsModel> _allNews = [];
 
