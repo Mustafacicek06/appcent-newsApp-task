@@ -1,16 +1,21 @@
 NewsPage
-![news_page](https://user-images.githubusercontent.com/52332960/163214141-79d3e04a-4196-42ba-91bb-838cb41e437c.png)
+
+![news_page](https://user-images.githubusercontent.com/52332960/163215404-5e3e31b5-beff-4993-bf7d-7408a5a0c7df.png)
 
 DetailPage
-![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 16 46](https://user-images.githubusercontent.com/52332960/163214221-5a9f07b1-29da-47e5-86cf-dbd9d9a5da61.png)
+
+![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.16.46.png…]()
+
 
 ShareButton
-![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 16 55](https://user-images.githubusercontent.com/52332960/163214272-de2758f0-23d0-4810-a0bb-233279e0c151.png)
+![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.16.55.png…]()
 
 
 webView
-![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 27](https://user-images.githubusercontent.com/52332960/163214300-e81b026e-d8a8-47ad-b262-0b00b3bee0d9.png)
+
+![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.17.27.png…]()
+
 
 Favorites Page
-![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 54](https://user-images.githubusercontent.com/52332960/163214992-182cfa6c-f894-4f4f-a34d-7c157077975d.png)
 
+![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.17.54.png…]()
