@@ -21,7 +21,6 @@ class DetailView extends StatefulWidget {
 
 class _DetailViewState extends State<DetailView>
     with SingleTickerProviderStateMixin {
-  List<NewsModel>? _favoriteNewsList = [];
   late TabController tabController;
   late StreamController<NewsModel> streamController;
 

@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'news_model.g.dart';
@@ -14,7 +13,7 @@ NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
 String newsModelToJson(NewsModel data) => json.encode(data.toJson());
 
 @JsonSerializable()
-class NewsModel with ChangeNotifier {
+class NewsModel {
   NewsModel({
     this.source,
     this.author,
@@ -47,12 +46,6 @@ class NewsModel with ChangeNotifier {
 
   setFavoriteNews(NewsModel news, int index) {
     favoriteNews?.add(news);
-
-    if (favoriteNews != null) {
-      debugPrint(favoriteNews!.length.toString());
-    } else {
-      debugPrint('null bro ');
-    }
   }
 }
 

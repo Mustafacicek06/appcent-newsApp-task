@@ -3,7 +3,7 @@ class Constants {
   Constants._init();
 
   final String baseUrl = "https://newsapi.org/v2/everything?q=";
-  final String myNewsApiKeyValue = "7b291c05514b4efd90b46adf17717c68";
+  final String myNewsApiKeyValue = "7cc9c3c573cc49de8b35a460ecb66ce2";
   String searchingCategory = "";
   String imageNotFound = "Image Not Found";
   String appTitle = "Appcent NewsApp";

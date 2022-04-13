@@ -6,19 +6,8 @@ import 'package:appcent_news_task/features/news/viewmodel/news_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class FavoritesView extends StatefulWidget {
+class FavoritesView extends StatelessWidget {
   const FavoritesView({Key? key}) : super(key: key);
-
-  @override
-  State<FavoritesView> createState() => _FavoritesViewState();
-}
-
-class _FavoritesViewState extends State<FavoritesView> {
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
