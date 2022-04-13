@@ -12,4 +12,5 @@ webView
 ![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 27](https://user-images.githubusercontent.com/52332960/163214300-e81b026e-d8a8-47ad-b262-0b00b3bee0d9.png)
 
 Favorites Page
-![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 54](https://user-images.githubusercontent.com/52332960/163214396-68647e3b-960a-450a-a099-5033fa78dadb.png)
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 54](https://user-images.githubusercontent.com/52332960/163214992-182cfa6c-f894-4f4f-a34d-7c157077975d.png)
+
