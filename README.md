@@ -9,7 +9,9 @@ DetailPage
 
 
 ShareButton
-![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.16.55.png…]()
+
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 16 55](https://user-images.githubusercontent.com/52332960/163215953-619a2426-6f44-41d6-b811-ba7382963689.png)
+
 
 
 webView
