@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'news_model.g.dart';
@@ -13,7 +14,7 @@ NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
 String newsModelToJson(NewsModel data) => json.encode(data.toJson());
 
 @JsonSerializable()
-class NewsModel {
+class NewsModel with ChangeNotifier {
   NewsModel({
     this.source,
     this.author,
@@ -33,7 +34,8 @@ class NewsModel {
   final String? urlToImage;
   final DateTime? publishedAt;
   final String? content;
-  static List<NewsModel>? favoriteNews;
+
+  static List<NewsModel>? favoriteNews = [];
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return _$NewsModelFromJson(json);
@@ -43,8 +45,14 @@ class NewsModel {
     return _$NewsModelToJson(this);
   }
 
-  static setFavoriteNews(List<NewsModel> news) {
-    favoriteNews?.addAll(news);
+  setFavoriteNews(NewsModel news, int index) {
+    favoriteNews?.add(news);
+
+    if (favoriteNews != null) {
+      debugPrint(favoriteNews!.length.toString());
+    } else {
+      debugPrint('null bro ');
+    }
   }
 }
 

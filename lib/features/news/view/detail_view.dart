@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:appcent_news_task/core/constants/constants.dart';
 import 'package:appcent_news_task/core/constants/style_constants.dart';
 import 'package:appcent_news_task/features/news/model/news_model.dart';
@@ -5,6 +7,7 @@ import 'package:appcent_news_task/features/news/view/web_view.dart';
 import 'package:appcent_news_task/features/news/viewmodel/news_view_model.dart';
 
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
@@ -20,6 +23,7 @@ class _DetailViewState extends State<DetailView>
     with SingleTickerProviderStateMixin {
   List<NewsModel>? _favoriteNewsList = [];
   late TabController tabController;
+  late StreamController<NewsModel> streamController;
 
   @override
   void initState() {
@@ -102,10 +106,12 @@ class _DetailViewState extends State<DetailView>
         ),
         InkWell(
             onTap: () {
-              setState(() {
-                _favoriteNewsList!.add(_newsViewModel.models[widget.newsIndex]);
-                NewsModel.setFavoriteNews(_favoriteNewsList!);
-              });
+              // _favoriteNewsList!.add(_newsViewModel.models[widget.newsIndex]);
+              final newsModel = NewsModel();
+
+              newsModel.setFavoriteNews(
+                  _newsViewModel.models[widget.newsIndex], widget.newsIndex);
+              setState(() {});
             },
             child: const Icon(Icons.favorite))
       ],
@@ -140,9 +146,12 @@ class _DetailViewState extends State<DetailView>
 
   Flexible scaffoldBodyNewsImage(NewsViewModel _newsViewModel) {
     return Flexible(
+      flex: 1,
       child: ClipRRect(
           child: Image.network(
         _newsViewModel.models[widget.newsIndex].urlToImage.toString(),
+        fit: BoxFit.cover,
+        scale: 1.0,
         errorBuilder: (context, error, stackTrace) {
           return Text(Constants.instance.imageNotFound);
         },
@@ -153,12 +162,13 @@ class _DetailViewState extends State<DetailView>
   Row scaffoldBodyIcons(NewsViewModel _newsViewModel, int? _publishedYear,
       int? _publishedMonth, int? _publishedDay) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Expanded(
           child: ListTile(
             leading: const Icon(Icons.access_alarm),
-            trailing: Text(
+            title: Text(
               _newsViewModel.models[widget.newsIndex].author.toString(),
               style: const TextStyle(color: Colors.black),
             ),
@@ -167,8 +177,7 @@ class _DetailViewState extends State<DetailView>
         Expanded(
             child: ListTile(
           leading: const Icon(Icons.date_range_outlined),
-          trailing:
-              Text("${_publishedYear}-${_publishedMonth}-${_publishedDay}"),
+          title: Text("${_publishedYear}-${_publishedMonth}-${_publishedDay}"),
         ))
       ],
     );
