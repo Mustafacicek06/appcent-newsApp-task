@@ -31,9 +31,7 @@ class _HomePageState extends State<HomePage> {
           onSelectedTab: (onSelectedTab) {
             _currentTab = onSelectedTab;
 
-            onSelectedTab == TabItem.news
-                ? const NewsView()
-                : const FavoritesView();
+            onSelectedTab == TabItem.news ? NewsView() : FavoritesView();
           }),
     );
   }
