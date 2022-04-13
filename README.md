@@ -16,9 +16,11 @@ ShareButton
 
 webView
 
-![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.17.27.png…]()
+
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 27](https://user-images.githubusercontent.com/52332960/163216231-a6e43de4-bcc1-4036-8979-433bf579a468.png)
+
 
 
 Favorites Page
 
-![Uploading Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18.17.54.png…]()
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 54](https://user-images.githubusercontent.com/52332960/163216284-b85bc091-b204-4c27-b2c2-666ce1f124ab.png)
