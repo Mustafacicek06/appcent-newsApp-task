@@ -1,16 +1,15 @@
-# appcent_news_task
+NewsPage
+![news_page](https://user-images.githubusercontent.com/52332960/163214141-79d3e04a-4196-42ba-91bb-838cb41e437c.png)
 
-A new Flutter project.
+DetailPage
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 16 46](https://user-images.githubusercontent.com/52332960/163214221-5a9f07b1-29da-47e5-86cf-dbd9d9a5da61.png)
 
-## Getting Started
+ShareButton
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 16 55](https://user-images.githubusercontent.com/52332960/163214272-de2758f0-23d0-4810-a0bb-233279e0c151.png)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+webView
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 27](https://user-images.githubusercontent.com/52332960/163214300-e81b026e-d8a8-47ad-b262-0b00b3bee0d9.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Favorites Page
+![Simulator Screen Shot - iPhone 13 Pro - 2022-04-13 at 18 17 54](https://user-images.githubusercontent.com/52332960/163214396-68647e3b-960a-450a-a099-5033fa78dadb.png)
